@@ -41,3 +41,6 @@ build/
 ### Resources ###
 resources/screenshots/
 *.png
+
+.idea/
+*.iml
