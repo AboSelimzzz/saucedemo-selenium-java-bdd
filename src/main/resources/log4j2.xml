@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="DEBUG">
+<Configuration status="WARN">
 
     <Appenders>
 
         <Console name="ConsoleAppender" target="SYSTEM_OUT">
-            <PatternLayout pattern="[%-5level] %c{1} - %msg%n"/>
+            <PatternLayout
+                    disableAnsi="false"
+                    pattern="%highlight{[%level]}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=green, DEBUG=cyan, TRACE=white} [%c{1}] - %msg%n"/>
         </Console>
 
         <RollingFile name="FileAppender"
                      fileName="test-output/logs/test-run.log"
                      filePattern="test-output/logs/test-run-%d{yyyy-MM-dd}.log">
-            <PatternLayout pattern="[%-5level] %c{1} - %msg%n"/>
+            <PatternLayout
+                    pattern="[%level] [%c{1}] - %msg%n"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
             </Policies>
@@ -19,22 +22,40 @@
     </Appenders>
 
     <Loggers>
-        <!-- Your framework — shows everything DEBUG and above -->
-        <Logger name="com.example.framework" level="DEBUG" additivity="false">
+        <Logger name="pages"    level="DEBUG" additivity="false">
             <AppenderRef ref="ConsoleAppender"/>
             <AppenderRef ref="FileAppender"/>
         </Logger>
-
-        <!-- Your test package — same -->
+        <Logger name="driver"   level="DEBUG" additivity="false">
+            <AppenderRef ref="ConsoleAppender"/>
+            <AppenderRef ref="FileAppender"/>
+        </Logger>
+        <Logger name="utils"    level="DEBUG" additivity="false">
+            <AppenderRef ref="ConsoleAppender"/>
+            <AppenderRef ref="FileAppender"/>
+        </Logger>
+        <Logger name="config"   level="DEBUG" additivity="false">
+            <AppenderRef ref="ConsoleAppender"/>
+            <AppenderRef ref="FileAppender"/>
+        </Logger>
         <Logger name="features" level="DEBUG" additivity="false">
             <AppenderRef ref="ConsoleAppender"/>
             <AppenderRef ref="FileAppender"/>
         </Logger>
+        <Logger name="support"  level="DEBUG" additivity="false">
+            <AppenderRef ref="ConsoleAppender"/>
+            <AppenderRef ref="FileAppender"/>
+        </Logger>
+        <Logger name="runner"   level="DEBUG" additivity="false">
+            <AppenderRef ref="ConsoleAppender"/>
+            <AppenderRef ref="FileAppender"/>
+        </Logger>
 
-        <!-- Everything else -->
-        <Root level="INFO">
+        <!-- Single root logger — suppresses noisy Selenium/Cucumber internals -->
+        <Root level="WARN">
             <AppenderRef ref="ConsoleAppender"/>
         </Root>
+
     </Loggers>
 
 </Configuration>
