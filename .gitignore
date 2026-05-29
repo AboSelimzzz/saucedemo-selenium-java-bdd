@@ -46,3 +46,5 @@ resources/screenshots/
 
 ### Test Output ###
 test-output/
+*.xml
+*.log
