@@ -43,4 +43,6 @@ resources/screenshots/
 *.png
 
 .idea/
-*.iml
+
+### Test Output ###
+test-output/
