@@ -1,26 +1,33 @@
 package features.stepDefinitions.web;
 
-import io.cucumber.java.PendingException;
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Then;
+import io.cucumber.java.en.*;
+import org.apache.logging.log4j.Logger;
+import org.junit.Assert;
+import pages.LoginPage;
+import utils.LoggerUtil;
+import utils.TestDataReader;
 
 public class LoginSteps {
 
-    @Then("the {string} page is displayed")
-    public void thePageIsDisplayed(String arg0) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    private final LoginPage loginPage = new LoginPage();
+
+    private static final Logger log = LoggerUtil.getLogger(LoginSteps.class);
+
+    @Then("the error message {string} should be displayed")
+    public void theErrorMessageShouldBeDisplayed(String message) {
+        log.info("Verifying the error message {}", message);
+        String actualMessage = loginPage.getErrorMessage();
+        Assert.assertTrue("Expected message '" + message + "' to be displayed but it was not", loginPage.isErrorDisplayed());
+        Assert.assertEquals("Expected message : " + message + " but was: " + actualMessage, message, actualMessage);
     }
 
-    @And("the {string} field is displayed")
-    public void theFieldIsDisplayed(String arg0) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
-    }
-
-    @And("the {string} button is displayed")
-    public void theButtonIsDisplayed(String arg0) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    @When("the user logs in as {string} from {string}")
+    public void theUserLogsInAs(String userType, String category) {
+        String username = TestDataReader.getUsername(category, userType);
+        String password = TestDataReader.getPassword(category, userType);
+        log.info("Logging in as '{}' from category '{}'", userType, category);
+        loginPage.fillFieldWith("username", username);
+        loginPage.fillFieldWith("password", password);
+        loginPage.clickOn("login");
     }
 }

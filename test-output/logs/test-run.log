@@ -1,0 +1,70 @@
+2026-05-29 04:09:07.127 [main] INFO  CommonSteps - Opening website: Sauce Demo
+2026-05-29 04:09:08.015 [main] INFO  CommonSteps - Verifying the page title is: Sauce Demo
+2026-05-29 04:09:08.057 [main] INFO  CommonSteps - Verifying the page title is: Sauce Demo
+2026-05-29 04:09:08.088 [main] INFO  CommonSteps - Verifying field 'username' is displayed
+2026-05-29 04:09:08.166 [main] INFO  CommonSteps - Verifying field 'password' is displayed
+2026-05-29 04:09:08.221 [main] INFO  CommonSteps - Verifying button 'login' is displayed
+2026-05-29 04:09:10.608 [main] INFO  CommonSteps - Opening website: Sauce Demo
+2026-05-29 04:09:11.502 [main] INFO  CommonSteps - Verifying the page title is: Sauce Demo
+2026-05-29 04:09:12.207 [main] INFO  LoginSteps - Logging in as 'standard_user' from category 'validUsers'
+2026-05-29 04:09:12.921 [main] INFO  CommonSteps - Verifying the page title is: Products
+2026-05-29 04:09:14.305 [main] INFO  CommonSteps - Opening website: Sauce Demo
+2026-05-29 04:09:15.125 [main] INFO  CommonSteps - Verifying the page title is: Sauce Demo
+2026-05-29 04:09:15.148 [main] INFO  LoginSteps - Logging in as 'problem_user' from category 'validUsers'
+2026-05-29 04:09:15.748 [main] INFO  CommonSteps - Verifying the page title is: Products
+2026-05-29 04:09:17.068 [main] INFO  CommonSteps - Opening website: Sauce Demo
+2026-05-29 04:09:17.887 [main] INFO  CommonSteps - Verifying the page title is: Sauce Demo
+2026-05-29 04:09:17.912 [main] INFO  LoginSteps - Logging in as 'performance_glitch_user' from category 'validUsers'
+2026-05-29 04:09:23.500 [main] INFO  CommonSteps - Verifying the page title is: Products
+2026-05-29 04:09:24.944 [main] INFO  CommonSteps - Opening website: Sauce Demo
+2026-05-29 04:09:25.692 [main] INFO  CommonSteps - Verifying the page title is: Sauce Demo
+2026-05-29 04:09:25.716 [main] INFO  LoginSteps - Logging in as 'error_user' from category 'validUsers'
+2026-05-29 04:09:26.224 [main] INFO  CommonSteps - Verifying the page title is: Products
+2026-05-29 04:09:27.579 [main] INFO  CommonSteps - Opening website: Sauce Demo
+2026-05-29 04:09:28.336 [main] INFO  CommonSteps - Verifying the page title is: Sauce Demo
+2026-05-29 04:09:28.362 [main] INFO  LoginSteps - Logging in as 'visual_user' from category 'validUsers'
+2026-05-29 04:09:28.913 [main] INFO  CommonSteps - Verifying the page title is: Products
+2026-05-29 04:09:30.259 [main] INFO  CommonSteps - Opening website: Sauce Demo
+2026-05-29 04:09:31.007 [main] INFO  CommonSteps - Verifying the page title is: Sauce Demo
+2026-05-29 04:09:31.033 [main] INFO  CommonSteps - Filling the username field with Test
+2026-05-29 04:09:31.244 [main] INFO  CommonSteps - Filling the password field with Test
+2026-05-29 04:09:31.403 [main] INFO  CommonSteps - Clicking on login
+2026-05-29 04:09:31.523 [main] INFO  LoginSteps - Verifying the error message Epic sadface: Username and password do not match any user in this service
+2026-05-29 04:09:31.593 [main] INFO  CommonSteps - Verifying button 'error close' is displayed
+2026-05-29 04:09:32.998 [main] INFO  CommonSteps - Opening website: Sauce Demo
+2026-05-29 04:09:33.894 [main] INFO  CommonSteps - Verifying the page title is: Sauce Demo
+2026-05-29 04:09:33.909 [main] INFO  CommonSteps - Filling the password field with secret_sauce
+2026-05-29 04:09:34.105 [main] INFO  CommonSteps - Clicking on login
+2026-05-29 04:09:34.236 [main] INFO  LoginSteps - Verifying the error message Epic sadface: Username is required
+2026-05-29 04:09:34.288 [main] INFO  CommonSteps - Verifying button 'error close' is displayed
+2026-05-29 04:09:35.647 [main] INFO  CommonSteps - Opening website: Sauce Demo
+2026-05-29 04:09:36.424 [main] INFO  CommonSteps - Verifying the page title is: Sauce Demo
+2026-05-29 04:09:36.444 [main] INFO  CommonSteps - Filling the username field with standard_user
+2026-05-29 04:09:36.659 [main] INFO  CommonSteps - Clicking on login
+2026-05-29 04:09:36.787 [main] INFO  LoginSteps - Verifying the error message Epic sadface: Password is required
+2026-05-29 04:09:36.859 [main] INFO  CommonSteps - Verifying button 'error close' is displayed
+2026-05-29 04:09:38.192 [main] INFO  CommonSteps - Opening website: Sauce Demo
+2026-05-29 04:09:38.967 [main] INFO  CommonSteps - Verifying the page title is: Sauce Demo
+2026-05-29 04:09:38.999 [main] INFO  LoginSteps - Logging in as 'locked_out_user' from category 'lockedUsers'
+2026-05-29 04:09:39.487 [main] INFO  LoginSteps - Verifying the error message Epic sadface: Sorry, this user has been locked out.
+2026-05-29 04:09:39.549 [main] INFO  CommonSteps - Verifying button 'error close' is displayed
+INFO  CommonSteps - Opening website: Sauce Demo
+INFO  CommonSteps - Verifying the page title is: Sauce Demo
+INFO  CommonSteps - Verifying the page title is: Sauce Demo
+INFO  CommonSteps - Verifying field 'username' is displayed
+INFO  CommonSteps - Verifying field 'password' is displayed
+INFO  CommonSteps - Verifying button 'login' is displayed
+INFO  CommonSteps - Opening website: Sauce Demo
+INFO  CommonSteps - Verifying the page title is: Sauce Demo
+INFO  LoginSteps - Logging in as 'standard_user' from category 'validUsers'
+INFO  CommonSteps - Verifying the page title is: Products
+INFO  CommonSteps - Opening website: Sauce Demo
+INFO  CommonSteps - Verifying the page title is: Sauce Demo
+INFO  LoginSteps - Logging in as 'problem_user' from category 'validUsers'
+INFO  CommonSteps - Verifying the page title is: Products
+[INFO ] CommonSteps - Opening website: Sauce Demo
+[INFO ] CommonSteps - Verifying the page title is: Sauce Demo
+[INFO ] CommonSteps - Verifying the page title is: Sauce Demo
+[INFO ] CommonSteps - Verifying field 'username' is displayed
+[INFO ] CommonSteps - Verifying field 'password' is displayed
+[INFO ] CommonSteps - Verifying button 'login' is displayed

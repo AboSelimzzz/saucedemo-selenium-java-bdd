@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extentreports>
+    <configuration>
+        <!-- Report theme: standard or dark -->
+        <theme>dark</theme>
+
+        <!-- Report title shown in browser tab -->
+        <documentTitle>SauceDemo Test Report</documentTitle>
+
+        <!-- Report name shown in header -->
+        <reportName>SauceDemo — Selenium BDD Automation Report</reportName>
+
+        <!-- Encoding -->
+        <encoding>UTF-8</encoding>
+    </configuration>
+</extentreports>

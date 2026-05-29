@@ -14,6 +14,10 @@ public class BasePage {
 
     public BasePage(){ this.driver = DriverFactory.getDriver();}
 
+    protected WebElement find(By locator){
+        return driver.findElement(locator);
+    }
+
     protected void click(By locator){
         log.info("Clicking element: {}", locator);
         WaitUtil.waitForClickability(locator).click();
@@ -33,7 +37,7 @@ public class BasePage {
 
     protected boolean isDisplayed(By locator){
         try{
-            return driver.findElement(locator).isDisplayed();
+            return find(locator).isDisplayed();
         } catch (NoSuchElementException e) {
             log.warn("Element not found: {}", locator);
             return false;
@@ -42,7 +46,7 @@ public class BasePage {
 
     protected boolean isEnabled(By locator){
         try{
-            return driver.findElement(locator).isEnabled();
+            return find(locator).isEnabled();
         } catch (NoSuchElementException e) {
             log.warn("Element not found: {}", locator);
             return false;

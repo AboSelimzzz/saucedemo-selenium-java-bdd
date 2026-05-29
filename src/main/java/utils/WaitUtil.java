@@ -18,7 +18,7 @@ public class WaitUtil {
     private static WebDriverWait getWait() {
         return new WebDriverWait(
                 DriverFactory.getDriver(),
-                Duration.ofSeconds(Long.parseLong(ConfigReader.get("explicitWait")))
+                Duration.ofSeconds(Long.parseLong(ConfigReader.get("implicitWait")))
         );
     }
 

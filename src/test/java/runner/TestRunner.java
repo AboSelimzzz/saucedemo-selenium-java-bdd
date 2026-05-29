@@ -6,10 +6,10 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/java/features/feature/",
+        features = "src/test/java/features/",
         glue = {
-                "features.stepDefinitions.",
-                "features.support.Hooks.java"
+                "features.stepDefinitions.web",
+                "support"
         },
         plugin = {
         "pretty",                                               // readable console output
@@ -18,7 +18,7 @@ import org.junit.runner.RunWith;
         "rerun:target/cucumber-reports/rerun.txt"              // re-run only failed tests
         },
         // Run only scenarios tagged @smoke — change to @regression for full suite
-        tags = "@smoke",
+        tags = "@sprint1",
 
         // Removes ANSI color codes from console output — cleaner logs
         monochrome = true
