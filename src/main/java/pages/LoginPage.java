@@ -76,7 +76,7 @@ public class LoginPage extends BasePage implements PageInteractions {
             case "login":
                 click(loginButton);
                 break;
-            case "close error":
+            case "error close":
                 click(errorCloseButton);
                 break;
             default:
@@ -84,5 +84,21 @@ public class LoginPage extends BasePage implements PageInteractions {
                         "Button not recognized on Login page: " + buttonName
                 );
         }
+    }
+
+    @Override
+    public boolean isElementHighlighted(String elementType, String elementName){
+        return switch (elementType.toLowerCase()) {
+            case "field" -> switch (elementName) {
+                case "username" -> isHighlighted(usernameField);
+                case "password" -> isHighlighted(passwordField);
+                default -> throw new IllegalArgumentException(
+                        "Field not recognized on Login page: " + elementName
+                );
+            };
+            default -> throw new IllegalArgumentException(
+                    "Element type not recognized: '" + elementType + "'. Use: field or button"
+            );
+        };
     }
 }
