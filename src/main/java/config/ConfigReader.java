@@ -1,7 +1,7 @@
 package config;
 
-import utils.LoggerUtil;
 import org.apache.logging.log4j.Logger;
+import utils.LoggerUtil;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

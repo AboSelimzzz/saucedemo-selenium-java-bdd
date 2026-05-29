@@ -1,6 +1,7 @@
-package features.stepDefinitions.web;
+package stepDefinitions.web;
 
-import io.cucumber.java.en.*;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import pages.LoginPage;
