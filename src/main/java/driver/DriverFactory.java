@@ -3,8 +3,10 @@ package driver;
 import config.ConfigReader;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.edge.*;
-import org.openqa.selenium.chrome.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import utils.LoggerUtil;
 
 import java.time.Duration;
@@ -19,7 +21,9 @@ public class DriverFactory {
     public static WebDriver getDriver(){return driver;}
 
     public static void initDriver(){
-        String browser = ConfigReader.get("browser").toLowerCase();
+        String browser = System.getProperty("browser") != null
+                ? System.getProperty("browser").toLowerCase()
+                : ConfigReader.get("browser").toLowerCase();
         log.info("Initializing browser: {}", browser);
 
         switch(browser){
