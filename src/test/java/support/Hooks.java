@@ -3,16 +3,21 @@ package support;
 
 import com.aventstack.extentreports.ExtentTest;
 import driver.DriverFactory;
-import utils.*;
-import io.cucumber.java.*;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import org.apache.logging.log4j.Logger;
+import utils.ExtentReportManager;
+import utils.LoggerUtil;
+import utils.ScreenshotUtil;
+import utils.WaitUtil;
 
 public class Hooks {
     private static final Logger log = LoggerUtil.getLogger(Hooks.class);
 
     @Before
     public void setUp(Scenario scenario) {
-        System.out.println("=== SYSTEM OUT WORKS ===");
+        System.setProperty("log4j.skipJansi", "false");
         log.info("========== STARTING: {} ==========", scenario.getName());
         DriverFactory.initDriver();
         ExtentTest extentTest = ExtentReportManager.getInstance().createTest(scenario.getName());

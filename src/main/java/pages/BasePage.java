@@ -1,9 +1,12 @@
 package pages;
 
 import driver.DriverFactory;
-import utils.LoggerUtil;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import utils.LoggerUtil;
 import utils.WaitUtil;
 
 public class BasePage {
@@ -47,6 +50,15 @@ public class BasePage {
     protected boolean isEnabled(By locator){
         try{
             return find(locator).isEnabled();
+        } catch (NoSuchElementException e) {
+            log.warn("Element not found: {}", locator);
+            return false;
+        }
+    }
+
+    protected boolean isHighlighted(By locator){
+        try{
+            return find(locator).getAttribute("class").contains("error");
         } catch (NoSuchElementException e) {
             log.warn("Element not found: {}", locator);
             return false;
