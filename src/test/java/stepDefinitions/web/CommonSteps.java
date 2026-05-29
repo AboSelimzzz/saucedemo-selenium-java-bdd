@@ -1,12 +1,18 @@
-package features.stepDefinitions.web;
+package stepDefinitions.web;
 
-import config.*;
-import pages.*;
-import utils.*;
-import driver.*;
-import io.cucumber.java.en.*;
+import config.ConfigReader;
+import driver.DriverFactory;
+import io.cucumber.java.PendingException;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
+import pages.LoginPage;
+import pages.PageInteractions;
+import utils.LoggerUtil;
+import utils.WaitUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -50,8 +56,9 @@ public class CommonSteps {
     public void thePageShouldBeDisplayed(String pageName) {
         log.info("Verifying the page title is: {}", pageName);
         String actualUrl = DriverFactory.getDriver().getCurrentUrl();
-        String expectedUrl = switch (pageName) {
-            case "Sauce Demo" -> ConfigReader.get("baseUrl");
+        String expectedUrl = ConfigReader.get("baseUrl");
+        expectedUrl += switch (pageName) {
+            case "Sauce Demo" -> "";
             case "Products" -> ConfigReader.get("productsUrl");
             case "Product Detail" -> ConfigReader.get("productDetailUrl");
             case "Cart" -> ConfigReader.get("cartUrl");
@@ -82,8 +89,24 @@ public class CommonSteps {
     }
 
     @And("the user clicks the {string} button")
-    public void theUserClicksOnTheButton(String buttonName){
+    public void theUserClicksOnTheButton(String buttonName) {
         log.info("Clicking on {}", buttonName);
         getCurrentPage().clickOn(buttonName);
+    }
+
+    @Then("the {string} {string} should not be displayed")
+    public void theShouldNotBeDisplayed(String elementName, String elementType) {
+        log.info("Verifying {} '{}' is not displayed", elementType, elementName);
+        boolean isDisplayed = getCurrentPage().isElementDisplayed(elementType, elementName);
+        Assert.assertFalse("Expected " + elementType + " '" + elementName + "' to be not displayed but it was not",
+                isDisplayed);
+    }
+
+    @And("the {string} {string} should be highlighted")
+    public void theShouldBeHighlighted(String elementName, String elementType) {
+        log.info("Verifying {} '{}' is highlighted", elementType, elementName);
+        boolean isHighlighted = getCurrentPage().isElementHighlighted(elementType, elementName);
+        Assert.assertTrue("Expected " + elementType + " '" + elementName + "' to be highlighted but it was not",
+                isHighlighted);
     }
 }
