@@ -1,5 +1,6 @@
 package utils;
 
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import java.util.Set;
@@ -7,49 +8,63 @@ import java.util.Set;
 public class WindowManager {
     private final WebDriver driver;
     private final WebDriver.Navigation navigate;
+    private static final Logger log = LoggerUtil.getLogger(WindowManager.class);
 
     public WindowManager(WebDriver driver){
         this.driver = driver;
         this.navigate = driver.navigate();
     }
 
+    public String getPageTitle(){
+        log.info("Getting page title: {}", driver.getTitle());
+        return driver.getTitle();
+    }
+
+    public String getCurrentUrl(){
+        log.info("Getting current url: {}", driver.getCurrentUrl());
+        return driver.getCurrentUrl();
+    }
+
+    public void navigateTo(String url){
+        log.info("Navigating to: {}", url);
+        driver.get(url);
+    }
+
+    public void refreshPage(){
+        log.info("Refreshing page");
+        driver.navigate().refresh();
+    }
+
+
     public void goBack(){
+        log.info("Going back");
         navigate.back();
     }
 
     public void goForward(){
+        log.info("Going forward");
         navigate.forward();
     }
 
-    public void refresh(){
-        navigate.refresh();
+    public Set<String> getCurrentWindows(){
+        log.info("Getting all the window handles");
+        return driver.getWindowHandles();
     }
-
-    public void goTo(String url){
-        navigate.to(url);
-    }
-
-    public Set<String> getCurrentWindows(){return driver.getWindowHandles();}
 
     public void switchToTab(String tabTitle){
         Set<String> windows = getCurrentWindows();
 
-        System.out.println("Number of tabs: " + windows.size());
-
-        System.out.println("Windows Handles:");
-        windows.forEach(System.out::println);
-
-        for(String window :windows){
-            System.out.println("Switching to window: " + window);
+        for(String window : windows){
+            log.debug("Switching to window: {}", window);
             driver.switchTo().window(window);
-
-            System.out.println("Current window title: " + driver.getTitle());
+            log.debug("Current window title: {}", driver.getTitle());
             if(tabTitle.equals(driver.getTitle()))
                 break;
         }
     }
+
     public void switchToNewTab(Set<String> existingWindows){
-        for(String handle: getCurrentWindows())
+        for(String handle : getCurrentWindows())
             if (!existingWindows.contains(handle)) {
                 driver.switchTo().window(handle);
                 break;

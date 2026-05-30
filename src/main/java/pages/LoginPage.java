@@ -28,7 +28,7 @@ public class LoginPage extends BasePage implements PageInteractions {
     }
 
     public void openLoginPage() {
-        navigateTo(ConfigReader.get("baseUrl"));
+        windowManager.navigateTo(ConfigReader.get("baseUrl"));
     }
 
     @Override

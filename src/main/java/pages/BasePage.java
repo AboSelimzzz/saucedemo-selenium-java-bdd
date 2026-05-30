@@ -8,14 +8,20 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import utils.LoggerUtil;
 import utils.WaitUtil;
+import utils.WindowManager;
 
 public class BasePage {
 
     protected WebDriver driver;
 
+    protected final WindowManager windowManager;
+
     private static final Logger log = LoggerUtil.getLogger(BasePage.class);
 
-    public BasePage(){ this.driver = DriverFactory.getDriver();}
+    public BasePage(){
+        this.driver = DriverFactory.getDriver();
+         windowManager = new WindowManager(driver);
+    }
 
     protected WebElement find(By locator){
         return driver.findElement(locator);
@@ -63,25 +69,5 @@ public class BasePage {
             log.warn("Element not found: {}", locator);
             return false;
         }
-    }
-
-    protected String getPageTitle(){
-        log.debug("Getting page title: {}", driver.getTitle());
-        return driver.getTitle();
-    }
-
-    protected String getCurrentUrl(){
-        log.debug("Getting current url: {}", driver.getCurrentUrl());
-        return driver.getCurrentUrl();
-    }
-
-    protected void navigateTo(String url){
-        log.debug("Navigating to: {}", url);
-        driver.get(url);
-    }
-
-    protected void refreshPage(){
-        log.debug("Refreshing page");
-        driver.navigate().refresh();
     }
 }
