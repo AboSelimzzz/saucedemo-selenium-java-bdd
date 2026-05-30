@@ -17,7 +17,7 @@ import org.junit.runner.RunWith;
                 "json:target/cucumber-reports/report.json",            // for CI/CD integration
                 "rerun:target/cucumber-reports/rerun.txt"              // re-run only failed tests
         },
-        // Run only scenarios tagged @smoke — change to @regression for full suite
+        // Run sprint-1 scenarios — change to @smoke or @regression for filtered runs
         tags = "@sprint1",
 
         // Removes ANSI color codes from console output — cleaner logs
