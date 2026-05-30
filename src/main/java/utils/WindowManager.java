@@ -16,38 +16,38 @@ public class WindowManager {
     }
 
     public String getPageTitle(){
-        log.info("Getting page title: {}", driver.getTitle());
+        log.debug("Getting page title: {}", driver.getTitle());
         return driver.getTitle();
     }
 
     public String getCurrentUrl(){
-        log.info("Getting current url: {}", driver.getCurrentUrl());
+        log.debug("Getting current url: {}", driver.getCurrentUrl());
         return driver.getCurrentUrl();
     }
 
     public void navigateTo(String url){
-        log.info("Navigating to: {}", url);
+        log.debug("Navigating to: {}", url);
         driver.get(url);
     }
 
     public void refreshPage(){
-        log.info("Refreshing page");
+        log.debug("Refreshing page");
         driver.navigate().refresh();
     }
 
 
     public void goBack(){
-        log.info("Going back");
+        log.debug("Going back");
         navigate.back();
     }
 
     public void goForward(){
-        log.info("Going forward");
+        log.debug("Going forward");
         navigate.forward();
     }
 
     public Set<String> getCurrentWindows(){
-        log.info("Getting all the window handles");
+        log.debug("Getting all the window handles");
         return driver.getWindowHandles();
     }
 
