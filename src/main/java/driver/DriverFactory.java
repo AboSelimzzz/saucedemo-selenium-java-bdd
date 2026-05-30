@@ -41,17 +41,16 @@ public class DriverFactory {
                 break;
             default:
                 throw new IllegalArgumentException(
-                        "Browser '" + browser + "' not supported. Use: chrome or firefox"
+                        "Browser '" + browser + "' not supported. Use: chrome or edge"
                 );
         }
         long implicitWait = Long.parseLong(ConfigReader.get("implicitWait"));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitWait));
-        log.info("Browser launched successfully: {}", browser);
+        log.debug("Browser launched successfully: {}", browser);
     }
 
     public static void quitDriver() {
         if (driver != null) {
-            log.info("Closing browser");
             driver.quit();
             driver = null;  // ← simply set to null, no ThreadLocal cleanup needed
         }

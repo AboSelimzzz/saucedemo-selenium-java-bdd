@@ -8,33 +8,39 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import utils.LoggerUtil;
 import utils.WaitUtil;
+import utils.WindowManager;
 
 public class BasePage {
 
     protected WebDriver driver;
 
+    protected final WindowManager windowManager;
+
     private static final Logger log = LoggerUtil.getLogger(BasePage.class);
 
-    public BasePage(){ this.driver = DriverFactory.getDriver();}
+    public BasePage(){
+        this.driver = DriverFactory.getDriver();
+         windowManager = new WindowManager(driver);
+    }
 
     protected WebElement find(By locator){
         return driver.findElement(locator);
     }
 
     protected void click(By locator){
-        log.info("Clicking element: {}", locator);
+        log.debug("Clicking element: {}", locator);
         WaitUtil.waitForClickability(locator).click();
     }
 
     protected void type(By locator, String text){
-        log.info("Typing '{}' into element: {}", text, locator);
+        log.debug("Typing '{}' into element: {}", text, locator);
         WebElement element = WaitUtil.waitForVisibility(locator);
         element.clear();
         element.sendKeys(text);
     }
 
     protected String getText(By locator){
-        log.info("Getting text from element: {}", locator);
+        log.debug("Getting text from element: {}", locator);
         return WaitUtil.waitForVisibility(locator).getText();
     }
 
@@ -63,25 +69,5 @@ public class BasePage {
             log.warn("Element not found: {}", locator);
             return false;
         }
-    }
-
-    protected String getPageTitle(){
-        log.info("Getting page title: {}", driver.getTitle());
-        return driver.getTitle();
-    }
-
-    protected String getCurrentUrl(){
-        log.info("Getting current url: {}", driver.getCurrentUrl());
-        return driver.getCurrentUrl();
-    }
-
-    protected void navigateTo(String url){
-        log.info("Navigating to: {}", url);
-        driver.get(url);
-    }
-
-    protected void refreshPage(){
-        log.info("Refreshing page");
-        driver.navigate().refresh();
     }
 }
