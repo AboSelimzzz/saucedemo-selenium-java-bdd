@@ -15,16 +15,16 @@ built with **Selenium WebDriver**, **Cucumber BDD**, and **Java** following the
 
 ## 📋 Table of Contents
 
-- [About the Project](#about-the-project)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Prerequisites](#prerequisites)
-- [Getting Started](#getting-started)
-- [How to Run Tests](#how-to-run-tests)
-- [Test Users](#test-users)
-- [Sprint Coverage](#sprint-coverage)
-- [Branching Strategy](#branching-strategy)
-- [Naming Conventions](#naming-conventions)
+- [About the Project](#-about-the-project)
+- [Tech Stack](#-tech-stack)
+- [Project Structure](#-project-structure)
+- [Prerequisites](#-prerequisites)
+- [Getting Started](#-getting-started)
+- [How to Run Tests](#-how-to-run-tests)
+- [Test Users](#-test-users)
+- [Sprint Coverage](#-sprint-coverage)
+- [Branching Strategy](#-branching-strategy)
+- [Naming Conventions](#-naming-conventions)
 
 ---
 
