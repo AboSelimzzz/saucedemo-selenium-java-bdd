@@ -22,19 +22,19 @@ public class BasePage {
     }
 
     protected void click(By locator){
-        log.info("Clicking element: {}", locator);
+        log.debug("Clicking element: {}", locator);
         WaitUtil.waitForClickability(locator).click();
     }
 
     protected void type(By locator, String text){
-        log.info("Typing '{}' into element: {}", text, locator);
+        log.debug("Typing '{}' into element: {}", text, locator);
         WebElement element = WaitUtil.waitForVisibility(locator);
         element.clear();
         element.sendKeys(text);
     }
 
     protected String getText(By locator){
-        log.info("Getting text from element: {}", locator);
+        log.debug("Getting text from element: {}", locator);
         return WaitUtil.waitForVisibility(locator).getText();
     }
 
@@ -66,22 +66,22 @@ public class BasePage {
     }
 
     protected String getPageTitle(){
-        log.info("Getting page title: {}", driver.getTitle());
+        log.debug("Getting page title: {}", driver.getTitle());
         return driver.getTitle();
     }
 
     protected String getCurrentUrl(){
-        log.info("Getting current url: {}", driver.getCurrentUrl());
+        log.debug("Getting current url: {}", driver.getCurrentUrl());
         return driver.getCurrentUrl();
     }
 
     protected void navigateTo(String url){
-        log.info("Navigating to: {}", url);
+        log.debug("Navigating to: {}", url);
         driver.get(url);
     }
 
     protected void refreshPage(){
-        log.info("Refreshing page");
+        log.debug("Refreshing page");
         driver.navigate().refresh();
     }
 }
