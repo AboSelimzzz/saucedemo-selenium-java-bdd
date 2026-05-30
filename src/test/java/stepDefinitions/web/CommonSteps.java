@@ -2,7 +2,6 @@ package stepDefinitions.web;
 
 import config.ConfigReader;
 import driver.DriverFactory;
-import io.cucumber.java.PendingException;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -13,6 +12,7 @@ import pages.LoginPage;
 import pages.PageInteractions;
 import utils.LoggerUtil;
 import utils.WaitUtil;
+import utils.WindowManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,6 +20,8 @@ import java.util.Map;
 public class CommonSteps {
 
     private static final Logger log = LoggerUtil.getLogger(CommonSteps.class);
+
+    private final WindowManager windowManager = new WindowManager(DriverFactory.getDriver());
 
     private final Map<String, PageInteractions> pageRegistry = new HashMap<>();
 
@@ -34,7 +36,7 @@ public class CommonSteps {
     }
 
     public PageInteractions getCurrentPage() {
-        String currentUrl = DriverFactory.getDriver().getCurrentUrl();
+        String currentUrl = windowManager.getCurrentUrl();
         return pageRegistry.entrySet()
                 .stream()
                 .filter(entry -> currentUrl.contains(entry.getKey()))
@@ -55,7 +57,7 @@ public class CommonSteps {
     @Then("the current page should be the {string} page")
     public void thePageShouldBeDisplayed(String pageName) {
         log.info("Verifying the page title is: {}", pageName);
-        String actualUrl = DriverFactory.getDriver().getCurrentUrl();
+        String actualUrl = windowManager.getCurrentUrl();
         String expectedUrl = ConfigReader.get("baseUrl");
         expectedUrl += switch (pageName) {
             case "Sauce Demo" -> "";

@@ -45,10 +45,8 @@ public class ExtentReportManager {
     }
 
     public static void flushReports() {
-        if (extent != null) {
+        if (extent != null)
             extent.flush();
-            log.info("ExtentReports flushed to file");
-        }
     }
 
 }
