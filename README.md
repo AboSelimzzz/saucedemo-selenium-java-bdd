@@ -21,6 +21,7 @@ built with **Selenium WebDriver**, **Cucumber BDD**, and **Java** following the
 - [Prerequisites](#-prerequisites)
 - [Getting Started](#-getting-started)
 - [How to Run Tests](#-how-to-run-tests)
+- [Run Templates](#-run-templates)
 - [Test Users](#-test-users)
 - [Sprint Coverage](#-sprint-coverage)
 - [Branching Strategy](#-branching-strategy)
@@ -47,16 +48,16 @@ The framework is designed using industry best practices:
 
 ## 🛠️ Tech Stack
 
-| Tool              | Version  | Purpose               |
-|-------------------|----------|-----------------------|
-| Java              | 17       | Programming language  |
-| Selenium WebDriver| 4.43.0   | Browser automation    |
-| Cucumber          | 7.34.3   | BDD framework         |
-| JUnit             | 4        | Test runner           |
-| Log4j2            | 2.25.4   | Logging               |
-| ExtentReports     | 5.1.2    | HTML test reports     |
-| Jackson Databind  | 3.1.3    | JSON test data reader |
-| Maven             | Latest   | Build & dependency management |
+| Tool               | Version | Purpose                       |
+|--------------------|---------|-------------------------------|
+| Java               | 17      | Programming language          |
+| Selenium WebDriver | 4.43.0  | Browser automation            |
+| Cucumber           | 7.34.3  | BDD framework                 |
+| JUnit              | 4       | Test runner                   |
+| Log4j2             | 2.25.4  | Logging                       |
+| ExtentReports      | 5.1.2   | HTML test reports             |
+| Jackson Databind   | 3.1.3   | JSON test data reader         |
+| Maven              | Latest  | Build & dependency management |
 
 ---
 
@@ -82,7 +83,7 @@ saucedemo-selenium-java-bdd/
 │   │   │       ├── TestDataReader.java       ← JSON test data loader
 │   │   │       ├── TestUtil.java
 │   │   │       ├── WaitUtil.java             ← explicit wait helpers
-│   │   │       └── WindowManager.java        ← tab/window switching
+│   │   │       └── WindowManager.java        ← navigation & tab/window management
 │   │   └── resources/
 │   │       ├── config.properties             ← browser, URLs, timeouts
 │   │       └── log4j2.xml                    ← logging configuration
@@ -147,7 +148,7 @@ mvn clean install -DskipTests
 
 Open `src/main/resources/config.properties` and verify:
 ```properties
-browser=chrome
+browser=edge
 baseUrl=https://www.saucedemo.com
 implicitWait=10
 
@@ -160,7 +161,7 @@ checkoutStep2Url=/checkout-step-two.html
 checkoutCompleteUrl=/checkout-complete.html
 ```
 
-> Supported browsers: `chrome`, `edge`
+> Supported browsers: `chrome`, `edge`. Override at runtime with `-Dbrowser=chrome`.
 
 ---
 
@@ -195,6 +196,8 @@ mvn test "-Dbrowser=chrome"
 mvn test "-Dbrowser=edge"
 ```
 
+> The browser flag overrides the value set in `config.properties`.
+
 **Run a specific scenario by line number**
 ```bash
 mvn test "-Dcucumber.features=src/test/resources/features/authentication/login.feature:25"
@@ -209,10 +212,46 @@ mvn test "-Dcucumber.filter.name=Verify that an invalid credentials displays an 
 
 **Re-run only failed tests**
 ```bash
-mvn test -Dcucumber.features="@target/cucumber-reports/rerun.txt"
+mvn test "-Dcucumber.features=@target/cucumber-reports/rerun.txt"
 ```
 
 **Reports** are generated at `test-output/extent-reports/report.html` after each run.
+
+---
+
+## 🧩 Run Templates
+
+Common run combinations ready to copy and use:
+
+**Smoke tests on Chrome**
+```bash
+mvn test "-Dbrowser=chrome" "-Dcucumber.filter.tags=@smoke"
+```
+
+**Full regression on Edge**
+```bash
+mvn test "-Dbrowser=edge" "-Dcucumber.filter.tags=@regression"
+```
+
+**Sprint 1 login tests on Chrome**
+```bash
+mvn test "-Dbrowser=chrome" "-Dcucumber.filter.tags=@sprint1 and @login"
+```
+
+**Single feature file on Edge**
+```bash
+mvn test "-Dbrowser=edge" "-Dcucumber.features=src/test/resources/features/authentication/login.feature"
+```
+
+**Single scenario by line number on Chrome**
+```bash
+mvn test "-Dbrowser=chrome" "-Dcucumber.features=src/test/resources/features/authentication/login.feature:25"
+```
+
+**Re-run only failed tests**
+```bash
+mvn test "-Dcucumber.features=@target/cucumber-reports/rerun.txt"
+```
 
 ---
 
@@ -220,26 +259,26 @@ mvn test -Dcucumber.features="@target/cucumber-reports/rerun.txt"
 
 SauceDemo provides built-in test accounts for different test scenarios:
 
-| Username                  | Password      | Behavior                    |
-|---------------------------|---------------|-----------------------------|
-| `standard_user`           | `secret_sauce`| ✅ Full normal flow          |
-| `locked_out_user`         | `secret_sauce`| 🔒 Login blocked             |
-| `problem_user`            | `secret_sauce`| 🐛 UI bugs present           |
-| `performance_glitch_user` | `secret_sauce`| 🐢 Slow response             |
-| `error_user`              | `secret_sauce`| ❌ Some interactions fail    |
-| `visual_user`             | `secret_sauce`| 👁️ Visual/CSS bugs           |
+| Username                  | Password       | Behavior                 |
+|---------------------------|----------------|--------------------------|
+| `standard_user`           | `secret_sauce` | ✅ Full normal flow       |
+| `locked_out_user`         | `secret_sauce` | 🔒 Login blocked         |
+| `problem_user`            | `secret_sauce` | 🐛 UI bugs present       |
+| `performance_glitch_user` | `secret_sauce` | 🐢 Slow response         |
+| `error_user`              | `secret_sauce` | ❌ Some interactions fail |
+| `visual_user`             | `secret_sauce` | 👁️ Visual/CSS bugs      |
 
 ---
 
 ## 📊 Sprint Coverage
 
-| Sprint   | Feature Area            | Module Tag    | Sprint Tag  | Status         |
-|----------|-------------------------|---------------|-------------|----------------|
-| Sprint 1 | Authentication & Login  | `@login`      | `@sprint1`  | ✅ Complete     |
-| Sprint 2 | Product Catalog         | `@catalog`    | `@sprint2`  | 🚧 In Progress  |
-| Sprint 3 | Shopping Cart           | `@cart`       | `@sprint3`  | ⏳ Pending      |
-| Sprint 4 | Checkout Flow           | `@checkout`   | `@sprint4`  | ⏳ Pending      |
-| Sprint 5 | Navigation & Edge Cases | `@navigation` | `@sprint5`  | ⏳ Pending      |
+| Sprint   | Feature Area            | Module Tag    | Sprint Tag | Status         |
+|----------|-------------------------|---------------|------------|----------------|
+| Sprint 1 | Authentication & Login  | `@login`      | `@sprint1` | ✅ Complete     |
+| Sprint 2 | Product Catalog         | `@catalog`    | `@sprint2` | 🚧 In Progress |
+| Sprint 3 | Shopping Cart           | `@cart`       | `@sprint3` | ⏳ Pending      |
+| Sprint 4 | Checkout Flow           | `@checkout`   | `@sprint4` | ⏳ Pending      |
+| Sprint 5 | Navigation & Edge Cases | `@navigation` | `@sprint5` | ⏳ Pending      |
 
 ---
 
@@ -263,16 +302,16 @@ when all sprints are complete.
 
 ## 📐 Naming Conventions
 
-| Artifact               | Format                        | Example               |
-|------------------------|-------------------------------|-----------------------|
-| User Story             | `US-[Sprint#]-[Story#]`       | `US-01-03`            |
-| Functional Requirement | `FR-[Module#]-[Req#]`         | `FR-01-04`            |
-| Test Case              | `TC-[ModuleCode]-[Seq#]`      | `TC-LOGIN-003`        |
-| Feature File           | `[module_name].feature`       | `login.feature`       |
+| Artifact               | Format                        | Example                                                                |
+|------------------------|-------------------------------|------------------------------------------------------------------------|
+| User Story             | `US-[Sprint#]-[Story#]`       | `US-01-03`                                                             |
+| Functional Requirement | `FR-[Module#]-[Req#]`         | `FR-01-04`                                                             |
+| Test Case              | `TC-[ModuleCode]-[Seq#]`      | `TC-LOGIN-003`                                                         |
+| Feature File           | `[module_name].feature`       | `login.feature`                                                        |
 | Cucumber Scenario      | Sentence describing behaviour | `Verify that valid credentials redirect the user to the Products page` |
-| Page Object Class      | `[Page]Page.java`             | `LoginPage.java`      |
-| Page Object Method     | `verb + Target`               | `clickLoginButton()`  |
-| Bug Report             | `BUG-[ModuleCode]-[Seq#]`     | `BUG-LOGIN-001`       |
+| Page Object Class      | `[Page]Page.java`             | `LoginPage.java`                                                       |
+| Page Object Method     | `verb + Target`               | `clickLoginButton()`                                                   |
+| Bug Report             | `BUG-[ModuleCode]-[Seq#]`     | `BUG-LOGIN-001`                                                        |
 
 ---
 
